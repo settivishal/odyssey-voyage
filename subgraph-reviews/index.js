@@ -1,18 +1,21 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { buildSubgraphSchema } from "@apollo/subgraph";
 
-import { readFileSync } from 'fs';
-import gql from 'graphql-tag';
+import { readFileSync } from "fs";
+import gql from "graphql-tag";
 
-const typeDefs = gql(readFileSync('./reviews.graphql', { encoding: 'utf-8' }));
-import resolvers from './resolvers.js'
-import ReviewsAPI from './datasources/ReviewsApi.js';
+const typeDefs = gql(readFileSync("./reviews.graphql", { encoding: "utf-8" }));
+import resolvers from "./resolvers.js";
+import ReviewsAPI from "./datasources/ReviewsApi.js";
 
 async function startApolloServer() {
-  const server = new ApolloServer({ typeDefs, resolvers });
+  const server = new ApolloServer({
+    schema: buildSubgraphSchema({ typeDefs, resolvers }),
+  });
 
   const port = 4002;
-  const subgraphName = 'reviews';
+  const subgraphName = "reviews";
 
   try {
     const { url } = await startStandaloneServer(server, {
