@@ -5,7 +5,7 @@ import { readFileSync } from 'fs';
 import gql from 'graphql-tag';
 
 const typeDefs = gql(readFileSync('./reviews.graphql', { encoding: 'utf-8' }));
-import resolvers from './resolvers';
+import resolvers from './resolvers.js'
 import ReviewsAPI from './datasources/ReviewsApi';
 
 async function startApolloServer() {

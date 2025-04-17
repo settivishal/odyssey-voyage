@@ -1,12 +1,14 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 
-import { readFileSync } from 'fs';
-import gql from 'graphql-tag';
+import { readFileSync } from "fs";
+import gql from "graphql-tag";
 
-const typeDefs = gql(readFileSync('./locations.graphql', { encoding: 'utf-8' }));
-import resolvers from './resolvers';
-import LocationsAPI from './datasources/LocationsApi';
+const typeDefs = gql(
+  readFileSync("./locations.graphql", { encoding: "utf-8" })
+);
+import resolvers from "./resolvers.js";
+import LocationsAPI from "./datasources/LocationsApi.js";
 
 /**
  * Start a standalone Apollo Server for the locations subgraph.
@@ -23,7 +25,7 @@ async function startApolloServer() {
   const server = new ApolloServer({ typeDefs, resolvers });
 
   const port = 4001;
-  const subgraphName = 'locations';
+  const subgraphName = "locations";
 
   try {
     const { url } = await startStandaloneServer(server, {
