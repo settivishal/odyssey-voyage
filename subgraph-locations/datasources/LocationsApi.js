@@ -1,7 +1,6 @@
 import { readFileSync } from 'fs';
 
 const locations = JSON.parse(readFileSync(new URL('./locations_data.json', import.meta.url)))?.locations;
-console.log('locations', locations);
 
 class LocationsAPI {
   getAllLocations() {
