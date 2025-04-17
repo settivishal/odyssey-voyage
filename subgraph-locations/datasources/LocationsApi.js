@@ -1,4 +1,4 @@
-const {locations} = require('./locations_data.json');
+import { locations } from './locations_data.json';
 
 class LocationsAPI {
   getAllLocations() {
@@ -10,4 +10,4 @@ class LocationsAPI {
   }
 }
 
-module.exports = LocationsAPI;
+export default LocationsAPI;
